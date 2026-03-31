@@ -1,16 +1,52 @@
 ﻿//JOGO DA FORCA
 
+using System.Security.Cryptography;
+
 Console.WriteLine("---------------------------------");
 Console.WriteLine("BEM VINDO AO JOGO DA FORCA");
 Console.WriteLine("---------------------------------");
 Console.WriteLine("Quando estiver pronto, pressione ENTER para iniciar o jogo!");
 Console.ReadLine();
 
-string palavra_secreta = "ABACATE";
+string[] palavras = [
+        "ABACATE",
+        "ABACAXI",
+        "ACEROLA",
+        "ACAI",
+        "ARACA",
+        "BACABA",
+        "BACURI",
+        "BANANA",
+        "CAJA",
+        "CAJU",
+        "CARAMBOLA",
+        "CUPUACU",
+        "GRAVIOLA",
+        "GOIABA",
+        "JABUTICABA",
+        "JENIPAPO",
+        "MACA",
+        "MANGABA",
+        "MANGA",
+        "MARACUJA",
+        "MURICI",
+        "PEQUI",
+        "PITANGA",
+        "PITAYA",
+        "SAPOTI",
+        "TANGERINA",
+        "UMBU",
+        "UVA",
+        "UVAIA"
+];
 
-char[] letras_corretas = new char[7];
+int num_aleatorio = RandomNumberGenerator.GetInt32(palavras.Length);
 
-for (int contador_letras = 0; contador_letras < 7; contador_letras++)
+string palavra_secreta = palavras[num_aleatorio];
+
+char[] letras_corretas = new char[palavra_secreta.Length];
+
+for (int contador_letras = 0; contador_letras < palavra_secreta.Length; contador_letras++)
 {
     letras_corretas[contador_letras] = '_';
 }
@@ -20,15 +56,108 @@ int contador_erros = 0;
 bool acerto = false;
 bool perdeu = false;
 
-while (!acerto && !perdeu)
+while (true)
 {
     Console.Clear();
     Console.WriteLine("Letras erradas: " + contador_erros);
     Console.Write("Tentativas: ");
 
-    for (int contador_letras = 0; contador_letras < 7; contador_letras++)
+    for (int contador_letras = 0; contador_letras < palavra_secreta.Length; contador_letras++)
     {
         Console.Write(letras_corretas[contador_letras]);
+    }
+
+    Console.WriteLine("\n-----------------------------");
+
+    if (contador_erros == 0)
+    {
+        Console.WriteLine(@" ___________        ");
+        Console.WriteLine(@" |/        |        ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@"_|____              ");
+
+    }
+    else if (contador_erros == 1)
+    {
+        Console.WriteLine(@" ___________        ");
+        Console.WriteLine(@" |/        |        ");
+        Console.WriteLine(@" |         o        ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@"_|____              ");
+
+    }
+    else if (contador_erros == 2)
+    {
+        Console.WriteLine(@" ___________        ");
+        Console.WriteLine(@" |/        |        ");
+        Console.WriteLine(@" |         o        ");
+        Console.WriteLine(@" |         |        ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@"_|____              ");
+    }
+    else if (contador_erros == 3)
+    {
+        Console.WriteLine(@" ___________        ");
+        Console.WriteLine(@" |/        |        ");
+        Console.WriteLine(@" |         o        ");
+        Console.WriteLine(@" |        /|        ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@"_|____              ");
+    }
+    else if (contador_erros == 4)
+    {
+        Console.WriteLine(@" ___________        ");
+        Console.WriteLine(@" |/        |        ");
+        Console.WriteLine(@" |         o        ");
+        Console.WriteLine(@" |        /|\       ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@"_|____              ");
+    }
+    else if (contador_erros == 5)
+    {
+        Console.WriteLine(@" ___________        ");
+        Console.WriteLine(@" |/        |        ");
+        Console.WriteLine(@" |         o        ");
+        Console.WriteLine(@" |        /|\       ");
+        Console.WriteLine(@" |        / \       ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@"_|____              ");
+    }
+    else if (contador_erros == 6)
+    {
+        Console.WriteLine(@" ___________        ");
+        Console.WriteLine(@" |/        |        ");
+        Console.WriteLine(@" |/        |        ");
+        Console.WriteLine(@" |         o        ");
+        Console.WriteLine(@" |        /|\       ");
+        Console.WriteLine(@" |        / \       ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@"_|____              ");
+    }
+
+    if (acerto)
+    {
+        Console.WriteLine($"Parabéns, você descobriu a palavra secreta :D");
+        Console.WriteLine("Total de letras erradas foram: " + contador_erros);
+    }
+    else if (perdeu)
+    {
+        Console.WriteLine("Infelizmente você não tem mais tentativas :(, a palavra era: " + palavra_secreta);
     }
 
     Console.Write("\nDigite uma letra: ");
@@ -53,17 +182,11 @@ while (!acerto && !perdeu)
     string letras_corretas_completa = string.Join("", letras_corretas);
 
     if (letras_corretas_completa == palavra_secreta)
-    {
         acerto = true;
-        Console.WriteLine($"Parabéns, você descobriu a palavra secreta :D");
-        Console.WriteLine("Total de letras erradas foram: " + contador_erros);
-    }
 
     if (contador_erros > 5)
-    {
-        Console.WriteLine("Infelizmente você não tem mais tentativas :(");
         perdeu = true;
-    }
+
 }
 
 Console.ReadLine();
