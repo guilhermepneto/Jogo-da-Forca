@@ -38,6 +38,14 @@ while (!acerto)
             letras_corretas[contador_palavra] = chute;
         }
     }
-    
-    Console.ReadLine();
+
+    string letras_corretas_completa = string.Join("", letras_corretas);
+
+    if (letras_corretas_completa == palavra_secreta)
+    {
+        acerto = true;
+        Console.WriteLine($"Parabéns, você descobriu a palavra secreta :D");
+    }
 }
+
+Console.ReadLine();
